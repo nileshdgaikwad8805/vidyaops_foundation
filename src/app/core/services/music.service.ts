@@ -5,7 +5,7 @@ interface Track {
   name: string;
 }
 
-const TARGET_VOLUME = 0.22;
+const TARGET_VOLUME = 0.14;
 const FADE_STEP = 0.02;
 const FADE_INTERVAL_MS = 80;
 
