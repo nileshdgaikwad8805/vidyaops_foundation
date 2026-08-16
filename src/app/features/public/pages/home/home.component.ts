@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { SiteContentService } from '../../../../core/services/site-content.service';
@@ -139,5 +139,5 @@ import { SacredDividerComponent } from '../../../../shared/components/sacred-div
 export class HomeComponent {
   readonly content = inject(SiteContentService);
   private readonly blog = inject(BlogService);
-  readonly featuredPosts = signal(this.blog.sortedPosts().slice(0, 3));
+  readonly featuredPosts = computed(() => this.blog.sortedPosts().slice(0, 3));
 }
