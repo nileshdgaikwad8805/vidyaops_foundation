@@ -5,6 +5,10 @@ interface Track {
   name: string;
 }
 
+const TARGET_VOLUME = 0.22;
+const FADE_STEP = 0.02;
+const FADE_INTERVAL_MS = 80;
+
 @Injectable({ providedIn: 'root' })
 export class MusicService {
   private readonly tracks: Track[] = [
@@ -16,6 +20,7 @@ export class MusicService {
 
   private audio: HTMLAudioElement | null = null;
   private currentIndex = 0;
+  private fadeTimer: ReturnType<typeof setInterval> | null = null;
   private readonly autoStartBound = (): void => this.tryAutoStart();
 
   readonly isPlaying = signal(false);
@@ -25,11 +30,63 @@ export class MusicService {
   constructor() {
     this.audio = new Audio(this.tracks[0].src);
     this.audio.loop = false;
+    this.audio.volume = 0;
     this.audio.addEventListener('ended', () => this.next());
 
     document.addEventListener('click', this.autoStartBound, { once: true });
     document.addEventListener('touchstart', this.autoStartBound, { once: true });
     document.addEventListener('scroll', this.autoStartBound, { once: true });
+  }
+
+  private clearFade(): void {
+    if (this.fadeTimer) {
+      clearInterval(this.fadeTimer);
+      this.fadeTimer = null;
+    }
+  }
+
+  private fadeIn(): void {
+    if (!this.audio) {
+      return;
+    }
+    this.clearFade();
+    this.audio.volume = 0;
+    this.audio.play().catch(() => undefined);
+    this.fadeTimer = setInterval(() => {
+      if (!this.audio) {
+        this.clearFade();
+        return;
+      }
+      const next = Math.min(this.audio.volume + FADE_STEP, TARGET_VOLUME);
+      this.audio.volume = next;
+      if (next >= TARGET_VOLUME) {
+        this.clearFade();
+      }
+    }, FADE_INTERVAL_MS);
+  }
+
+  private fadeOut(onDone?: () => void): void {
+    if (!this.audio) {
+      onDone?.();
+      return;
+    }
+    this.clearFade();
+    this.fadeTimer = setInterval(() => {
+      if (!this.audio) {
+        this.clearFade();
+        onDone?.();
+        return;
+      }
+      const next = this.audio.volume - FADE_STEP;
+      if (next <= 0) {
+        this.audio.volume = 0;
+        this.audio.pause();
+        this.clearFade();
+        onDone?.();
+      } else {
+        this.audio.volume = next;
+      }
+    }, FADE_INTERVAL_MS);
   }
 
   private tryAutoStart(): void {
@@ -51,28 +108,33 @@ export class MusicService {
     if (!this.audio) {
       return;
     }
-    this.currentIndex = (this.currentIndex + 1) % this.tracks.length;
-    this.audio.src = this.tracks[this.currentIndex].src;
-    this.audio.play().catch(() => undefined);
-    this.isPlaying.set(true);
-    this.trackName.set(this.tracks[this.currentIndex].name);
+    this.fadeOut(() => {
+      if (!this.audio) {
+        return;
+      }
+      this.currentIndex = (this.currentIndex + 1) % this.tracks.length;
+      this.audio.src = this.tracks[this.currentIndex].src;
+      this.isPlaying.set(true);
+      this.trackName.set(this.tracks[this.currentIndex].name);
+      this.fadeIn();
+    });
   }
 
   play(): void {
     if (!this.audio) {
       return;
     }
-    this.audio.play().catch(() => undefined);
     this.isPlaying.set(true);
     this.trackName.set(this.tracks[this.currentIndex].name);
+    this.fadeIn();
   }
 
   pause(): void {
     if (!this.audio) {
       return;
     }
-    this.audio.pause();
     this.isPlaying.set(false);
     this.trackName.set('');
+    this.fadeOut();
   }
 }
