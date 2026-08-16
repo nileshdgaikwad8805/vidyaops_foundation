@@ -1,7 +1,51 @@
 import { BlogPost } from '../models/site.models';
 
-// Auto-generated from static blog posts. Do not edit manually.
+// Auto-generated from blog-posts.json. Do not edit manually.
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: "getting-started-with-cloud-computing-a-beginner-s-guide",
+    title: "Getting Started with Cloud Computing: A Beginner's Guide",
+    excerpt: "Everything you need to know about cloud computing — explained simply for absolute beginners, completely free.",
+    date: "2026-08-16",
+    readTime: "8 min read",
+    category: "Cloud Computing",
+    domain: "Cloud Computing",
+    content: `<p>Welcome to this beginner-friendly guide on <strong>Cloud Computing</strong>. If you have been curious about the field but felt it was too technical or expensive to explore, this guide is for you. VidyaOps Foundation exists to prove that <strong>anyone can learn technology for free</strong>.</p>
+
+<h2>What is Cloud Computing?</h2>
+
+<p>In simple terms, cloud computing is one of the most in-demand skills in the technology industry today. It combines concepts, tools, and best practices that help businesses and individuals solve real-world problems with technology.</p>
+
+<p>For a beginner, the most important thing is to start with the <strong>core ideas</strong> rather than memorizing tools. Once the foundations are clear, everything else becomes much easier to learn.</p>
+
+<h2>Why Does It Matter?</h2>
+
+<p>Here are the main reasons this field matters in the modern world:</p>
+
+<ul><li><strong>Career opportunities</strong> &mdash; companies across every industry are hiring for these skills</li><li><strong>Practical impact</strong> &mdash; you can build, automate, and solve real problems</li><li><strong>Accessible learning</strong> &mdash; most tools have free tiers or free learning resources</li><li><strong>Growing demand</strong> &mdash; the need for these skills keeps rising every year</li></ul>
+
+<h2>Key Concepts for Beginners</h2>
+
+<p>Before diving in, get comfortable with these fundamental concepts:</p>
+
+<ul><li><strong>Core terminology</strong> &mdash; learn the basic vocabulary used in the field</li><li><strong>Main tools</strong> &mdash; the popular free tools professionals use daily</li><li><strong>Best practices</strong> &mdash; how experienced people structure their work</li><li><strong>Real-world use cases</strong> &mdash; how companies apply these ideas in practice</li></ul>
+
+<h2>Practical Steps to Start Learning</h2>
+
+<p>You can start today, even with zero experience. Follow these steps:</p>
+
+<ul><li>Start with free workshops and beginner tutorials</li><li>Practice with free tools and sandbox environments</li><li>Build one small project to apply what you learn</li><li>Join a community where you can ask questions and get help</li></ul>
+
+<h2>Common Mistakes to Avoid</h2>
+
+<ul><li>Trying to learn every tool at once instead of focusing on fundamentals</li><li>Watching tutorials without practicing</li><li>Waiting for the "perfect" time instead of starting now</li><li>Learning alone when a supportive community is available</li></ul>
+
+<h2>Your Next Steps</h2>
+
+<p>The best way to learn cloud computing is to start small, stay consistent, and learn with others. VidyaOps Foundation offers <strong>free guided workshops</strong> on cloud computing and related topics.</p>
+
+<p><em>Ready to take the next step? <a href="/workshops">Join our free workshops</a> and start building your skills today with a supportive community behind you.</em></p>`,
+  },
   {
     slug: "unlocking-database-management-a-beginner-s-guide",
     title: "Unlocking Database Management: A Beginner's Guide",
