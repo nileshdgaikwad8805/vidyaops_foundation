@@ -12,7 +12,7 @@ import { Web3FormsService } from '../../../../core/services/web3forms.service';
     <section class="section" style="padding-top: 5rem;">
       <div class="section-heading reveal">
         <p class="eyebrow">Community Leadership</p>
-        <h1 style="font-family:var(--font-heading);font-size:2.4rem;font-weight:800;color:var(--warm-brown);letter-spacing:-0.02em;margin-bottom:0.75rem;">Become a Volunteer</h1>
+        <h1 style="font-family:var(--font-display);font-size:2.4rem;font-weight:800;color:var(--ink);letter-spacing:-0.02em;margin-bottom:0.75rem;">Become a Volunteer</h1>
         <p>Share your expertise with learners who need it most. We handle the logistics so you can focus on teaching.</p>
       </div>
 
@@ -68,8 +68,8 @@ import { Web3FormsService } from '../../../../core/services/web3forms.service';
             </div>
           } @else {
             <div class="form-card" style="text-align:center;padding:3rem 2rem;">
-              <h2 style="font-family:var(--font-heading);font-weight:700;color:var(--warm-brown);margin-bottom:0.75rem;">Application Submitted!</h2>
-              <p style="color:var(--warm-brown-light);">Thank you for stepping up to lead. Our team will review your profile and reach out within 48 hours.</p>
+              <h2 style="font-family:var(--font-display);font-weight:700;color:var(--ink);margin-bottom:0.75rem;">Application Submitted!</h2>
+              <p style="color:var(--text-secondary);">Thank you for stepping up to lead. Our team will review your profile and reach out within 48 hours.</p>
             </div>
           }
         </div>

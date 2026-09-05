@@ -27,7 +27,7 @@ import { Web3FormsService } from '../../../../core/services/web3forms.service';
             <p class="eyebrow">Get in touch</p>
             <h2>Register for workshops, join the community, or ask us anything.</h2>
           </div>
-          <p style="color:var(--warm-brown-light);margin-bottom:1.5rem;">You can also reach us directly:</p>
+          <p style="color:var(--text-secondary);margin-bottom:1.5rem;">You can also reach us directly:</p>
           @for (detail of content.contactDetails; track detail.label) {
             <div class="contact-detail">
               <span class="contact-detail__icon">{{ detail.icon }}</span>

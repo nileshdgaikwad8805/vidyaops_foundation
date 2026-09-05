@@ -19,7 +19,7 @@ import { BlogService } from '../../../../core/services/blog.service';
     <section class="section section--alt" style="padding-top: 48px;">
       <div class="page-shell">
         <div class="card-grid">
-          @for (post of blog.sortedPosts(); track post.slug; let i = $index) {
+          @for (post of blog.sortedPosts(); track $index; let i = $index) {
             <article class="blog-card reveal" [attr.data-delay]="((i % 3) * 100).toString()">
               <div class="blog-card__body">
                 <p class="blog-card__meta">{{ blog.formatDate(post.date) }} &middot; {{ post.readTime }}</p>

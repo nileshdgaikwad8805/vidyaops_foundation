@@ -79,7 +79,7 @@ import { BlogService } from '../../../../core/services/blog.service';
           <h2>Free educational resources and insights.</h2>
         </div>
         <div class="card-grid">
-          @for (post of featuredPosts(); track post.slug; let i = $index) {
+          @for (post of featuredPosts(); track $index; let i = $index) {
             <article class="blog-card reveal" [attr.data-delay]="(i * 100).toString()">
               <div class="blog-card__body">
                 <p class="blog-card__meta">{{ blog.formatDate(post.date) }} &middot; {{ post.readTime }} read</p>
