@@ -5,7 +5,6 @@ import { filter } from 'rxjs/operators';
 
 import { SiteHeaderComponent } from '../../components/site-header/site-header.component';
 import { SiteFooterComponent } from '../../components/site-footer/site-footer.component';
-import { SacredDividerComponent } from '../../components/sacred-divider/sacred-divider.component';
 import { MusicToggleComponent } from '../../components/music-toggle/music-toggle.component';
 import { WhatsappFloatComponent } from '../../components/whatsapp-float/whatsapp-float.component';
 
@@ -16,24 +15,17 @@ import { WhatsappFloatComponent } from '../../components/whatsapp-float/whatsapp
     RouterOutlet,
     SiteHeaderComponent,
     SiteFooterComponent,
-    SacredDividerComponent,
     MusicToggleComponent,
     WhatsappFloatComponent,
   ],
   template: `
-    <div class="page-shell">
-      <app-site-header />
+    <app-site-header />
 
-      <main>
-        <router-outlet />
-      </main>
+    <main>
+      <router-outlet />
+    </main>
 
-      <app-sacred-divider />
-
-      <div class="water" aria-hidden="true"></div>
-
-      <app-site-footer />
-    </div>
+    <app-site-footer />
 
     <app-whatsapp-float />
     <app-music-toggle />

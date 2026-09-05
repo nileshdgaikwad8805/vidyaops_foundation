@@ -44,7 +44,6 @@ import { SiteContentService } from '../../../core/services/site-content.service'
             <a href="https://vidyaops.com" target="_blank" rel="noreferrer">VidyaOps</a>
           </div>
         </div>
-        <div class="footer-om">&#x0950;</div>
         <div class="footer-bottom">
           <span>&copy; 2026 VidyaOps Foundation. Pune, Maharashtra.</span>
           <span><a routerLink="/privacy">Privacy</a> &middot; <a routerLink="/terms">Terms</a> &middot; <a href="https://vidyaops.com" target="_blank" rel="noreferrer">Main Site</a></span>

@@ -15,7 +15,7 @@ import { SafeHtmlPipe } from '../../../../shared/pipes/safe-html.pipe';
         <h1>{{ post.title }}</h1>
         <p class="meta">{{ blog.formatDate(post.date) }} &middot; {{ post.readTime }}</p>
 
-        <div [innerHTML]="post.content | safeHtml"></div>
+        <div [innerHTML]="body | safeHtml"></div>
 
         <div class="divider"></div>
         <a routerLink="/blog" class="button button--secondary">&larr; Back to Blog</a>
@@ -33,4 +33,11 @@ export class BlogDetailComponent {
   private readonly route = inject(ActivatedRoute);
   readonly blog = inject(BlogService);
   readonly post = this.blog.getBySlug(this.route.snapshot.paramMap.get('slug') ?? '');
+
+  get body(): string {
+    return (this.post?.content ?? '').replace(
+      /<p class="eyebrow">[\s\S]*?<\/h1>[\s\S]*?<p class="meta">[\s\S]*?<\/p>/,
+      '',
+    );
+  }
 }
