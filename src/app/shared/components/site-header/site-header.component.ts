@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { SiteContentService } from '../../../core/services/site-content.service';
 
@@ -38,7 +38,6 @@ import { SiteContentService } from '../../../core/services/site-content.service'
 })
 export class SiteHeaderComponent {
   readonly content = inject(SiteContentService);
-  private readonly router = inject(Router);
   navOpen = false;
 
   toggleNav(): void {
@@ -47,6 +46,5 @@ export class SiteHeaderComponent {
 
   closeOnMobile(): void {
     this.navOpen = false;
-    this.router.navigate([this.router.url]);
   }
 }

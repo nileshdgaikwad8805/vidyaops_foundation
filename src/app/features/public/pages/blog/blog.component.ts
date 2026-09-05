@@ -16,18 +16,22 @@ import { BlogService } from '../../../../core/services/blog.service';
       </div>
     </section>
 
-    <div class="card-grid">
-      @for (post of blog.sortedPosts(); track post.slug; let i = $index) {
-        <article class="blog-card reveal" [attr.data-delay]="((i % 3) * 100).toString()">
-          <div class="blog-card__body">
-            <p class="blog-card__meta">{{ blog.formatDate(post.date) }} &middot; {{ post.readTime }}</p>
-            <h3><a [routerLink]="['/blog', post.slug]">{{ post.title }}</a></h3>
-            <p>{{ post.excerpt }}</p>
-            <a [routerLink]="['/blog', post.slug]" class="button button--secondary">Read More</a>
-          </div>
-        </article>
-      }
-    </div>
+    <section class="section section--alt" style="padding-top: 48px;">
+      <div class="page-shell">
+        <div class="card-grid">
+          @for (post of blog.sortedPosts(); track post.slug; let i = $index) {
+            <article class="blog-card reveal" [attr.data-delay]="((i % 3) * 100).toString()">
+              <div class="blog-card__body">
+                <p class="blog-card__meta">{{ blog.formatDate(post.date) }} &middot; {{ post.readTime }}</p>
+                <h3><a [routerLink]="['/blog', post.slug]">{{ post.title }}</a></h3>
+                <p>{{ post.excerpt }}</p>
+                <a [routerLink]="['/blog', post.slug]" class="button button--secondary">Read More</a>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+    </section>
   `,
 })
 export class BlogComponent {
