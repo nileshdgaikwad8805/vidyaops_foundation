@@ -46,6 +46,7 @@ export class SiteShellComponent {
             this.title.setTitle(data['title']);
           }
           this.initScrollReveal();
+          setTimeout(() => this.initScrollReveal(), 150);
         });
       this.initScrollReveal();
     });
@@ -60,20 +61,25 @@ export class SiteShellComponent {
   }
 
   private initScrollReveal(): void {
-    const els = document.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)');
-    const obs = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            obs.unobserve(entry.target);
+    setTimeout(() => {
+      const els = document.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)');
+      if (!els.length) {
+        return;
+      }
+      const obs = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              obs.unobserve(entry.target);
+            }
           }
-        }
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
-    );
-    for (const el of Array.from(els)) {
-      obs.observe(el);
-    }
+        },
+        { threshold: 0.05, rootMargin: '0px 0px -20px 0px' },
+      );
+      for (const el of Array.from(els)) {
+        obs.observe(el);
+      }
+    }, 0);
   }
 }
