@@ -32,7 +32,7 @@ import { BlogService } from '../../../../core/services/blog.service';
 
     <section class="section">
       <div>
-        <div class="section-heading reveal">
+        <div class="section-heading section-heading--center reveal">
           <p class="eyebrow">Our mission</p>
           <h2>Making technology education free, practical, and community-led.</h2>
           <p>VidyaOps Foundation removes financial and knowledge barriers that keep learners from exploring careers in Cloud, AI, Data Analysis, and Cybersecurity.</p>
@@ -51,7 +51,7 @@ import { BlogService } from '../../../../core/services/blog.service';
 
     <section class="section section--alt">
       <div>
-        <div class="section-heading reveal">
+        <div class="section-heading section-heading--center reveal">
           <p class="eyebrow">Workshops</p>
           <h2>Free workshops to help you start your tech journey.</h2>
           <p>All workshops are free and open to everyone. No prior experience required.</p>
@@ -74,7 +74,7 @@ import { BlogService } from '../../../../core/services/blog.service';
 
     <section class="section">
       <div>
-        <div class="section-heading reveal">
+        <div class="section-heading section-heading--center reveal">
           <p class="eyebrow">Blog</p>
           <h2>Free educational resources and insights.</h2>
         </div>
