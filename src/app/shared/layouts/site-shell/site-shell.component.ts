@@ -21,7 +21,7 @@ import { WhatsappFloatComponent } from '../../components/whatsapp-float/whatsapp
   template: `
     <app-site-header />
 
-    <main>
+    <main class="page-shell">
       <router-outlet />
     </main>
 

@@ -17,8 +17,7 @@ import { BlogService } from '../../../../core/services/blog.service';
     </section>
 
     <section class="section section--alt" style="padding-top: 48px;">
-      <div class="page-shell">
-        <div class="card-grid">
+      <div class="card-grid">
           @for (post of blog.sortedPosts(); track $index; let i = $index) {
             <article class="blog-card reveal" [attr.data-delay]="((i % 3) * 100).toString()">
               <div class="blog-card__body">
@@ -30,7 +29,6 @@ import { BlogService } from '../../../../core/services/blog.service';
             </article>
           }
         </div>
-      </div>
     </section>
   `,
 })

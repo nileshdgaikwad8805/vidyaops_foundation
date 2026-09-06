@@ -10,7 +10,7 @@ import { BlogService } from '../../../../core/services/blog.service';
   imports: [RouterLink],
   template: `
     <section class="home-hero">
-      <div class="page-shell home-hero__inner">
+      <div class="home-hero__inner">
         <p class="eyebrow">VidyaOps Foundation</p>
         <h1>Free tech education.<br />Real community.<br /><span class="text-gradient">No barriers.</span></h1>
         <p>
@@ -31,7 +31,7 @@ import { BlogService } from '../../../../core/services/blog.service';
     </section>
 
     <section class="section">
-      <div class="page-shell">
+      <div>
         <div class="section-heading reveal">
           <p class="eyebrow">Our mission</p>
           <h2>Making technology education free, practical, and community-led.</h2>
@@ -50,7 +50,7 @@ import { BlogService } from '../../../../core/services/blog.service';
     </section>
 
     <section class="section section--alt">
-      <div class="page-shell">
+      <div>
         <div class="section-heading reveal">
           <p class="eyebrow">Workshops</p>
           <h2>Free workshops to help you start your tech journey.</h2>
@@ -73,7 +73,7 @@ import { BlogService } from '../../../../core/services/blog.service';
     </section>
 
     <section class="section">
-      <div class="page-shell">
+      <div>
         <div class="section-heading reveal">
           <p class="eyebrow">Blog</p>
           <h2>Free educational resources and insights.</h2>
@@ -97,7 +97,7 @@ import { BlogService } from '../../../../core/services/blog.service';
     </section>
 
     <section class="section section--alt">
-      <div class="page-shell">
+      <div>
         <div class="cta-banner reveal">
           <p class="eyebrow" style="color: rgba(255,255,255,0.55);">Join the community</p>
           <h2>Learn, share, and grow with fellow tech enthusiasts.</h2>
