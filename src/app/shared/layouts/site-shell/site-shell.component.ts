@@ -1,6 +1,6 @@
 import { Component, inject, afterNextRender } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 
 import { SiteHeaderComponent } from '../../components/site-header/site-header.component';
@@ -34,6 +34,7 @@ import { WhatsappFloatComponent } from '../../components/whatsapp-float/whatsapp
 export class SiteShellComponent {
   private readonly router = inject(Router);
   private readonly title = inject(Title);
+  private readonly meta = inject(Meta);
 
   constructor() {
     afterNextRender(() => {
@@ -44,6 +45,10 @@ export class SiteShellComponent {
           const data = this.findData(route);
           if (data && data['title']) {
             this.title.setTitle(data['title']);
+          }
+          if (data && data['description']) {
+            this.meta.updateTag({ name: 'description', content: data['description'] });
+            this.meta.updateTag({ property: 'og:description', content: data['description'] });
           }
           this.initScrollReveal();
           setTimeout(() => this.initScrollReveal(), 150);
