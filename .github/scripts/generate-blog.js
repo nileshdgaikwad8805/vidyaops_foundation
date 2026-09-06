@@ -44,13 +44,37 @@ function slugify(text) {
 }
 
 // ───── Pick the least-used topic ─────
+function slugifyDefaultTitle(topic) {
+  return slugify(`Getting Started with ${topic}: A Beginner's Guide`);
+}
+
+function hasTemplatePost(posts, topic) {
+  return posts.some((p) => p.slug === slugifyDefaultTitle(topic));
+}
+
 function pickTopic(posts) {
   const counts = Object.fromEntries(DOMAINS.map((d) => [d, 0]));
   for (const p of posts) {
     if (counts[p.domain] !== undefined) counts[p.domain]++;
   }
+  // Heavily deprioritize topics that already have a matching template post,
+  // so the deterministic template rotates across topics instead of repeating.
+  for (const d of DOMAINS) {
+    if (hasTemplatePost(posts, d)) counts[d] += 1000;
+  }
   const sorted = DOMAINS.slice().sort((a, b) => counts[a] - counts[b]);
   return sorted[0];
+}
+
+// ───── Unique slug guard ─────
+function uniqueSlug(posts, base) {
+  let candidate = base;
+  let n = 2;
+  while (posts.some((p) => p.slug === candidate)) {
+    candidate = `${base}-${n}`;
+    n++;
+  }
+  return candidate;
 }
 
 // ───── Section templates for the deterministic fallback ─────
@@ -220,11 +244,7 @@ async function main() {
   console.log(`Generating blog post about: ${topic}`);
 
   const post = await generatePost(topic);
-  const slug = slugify(post.title);
-  if (!slug || posts.some((p) => p.slug === slug)) {
-    console.error('Duplicate or empty slug:', slug);
-    process.exit(1);
-  }
+  const slug = uniqueSlug(posts, slugify(post.title));
 
   posts.unshift({
     slug,
