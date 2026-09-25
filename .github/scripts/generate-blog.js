@@ -325,38 +325,56 @@ Guidelines:
 - Write for absolute beginners (students, freshers) in India. Explain every term the first time you use it.
 - Be specific and practical: name real free tools/resources, give concrete examples, comparisons, and step-by-step explanations tied to the chosen angle.
 - Positive, encouraging, jargon-free tone.
-- 1200-1800 words — comprehensive but focused on the angle, not generic filler.
+- Aim for ~900-1200 words — comprehensive but focused on the angle, not generic filler.
 - Structure with 4-6 sections (<h2> headings): what it is, why it matters, key concepts, practical steps, common mistakes to avoid, next steps — tailored to the angle.
 - Return ONLY the JSON, no other text or markdown fences.`;
 }
 
-async function callAi(prompt) {
+async function callAi(prompt, retries = 4) {
   const { baseUrl, model, apiKey } = aiEndpointConfig();
   if (!apiKey) return null;
 
-  const resp = await fetch(`${baseUrl}/chat/completions`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model,
-      messages: [{ role: 'user', content: prompt }],
-      temperature: 0.9,
-      max_tokens: 7000,
-    }),
-  });
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const resp = await fetch(`${baseUrl}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model,
+          messages: [{ role: 'user', content: prompt }],
+          temperature: 0.9,
+          max_tokens: 20000,
+        }),
+      });
 
-  if (!resp.ok) {
-    const err = await resp.text();
-    throw new Error(`AI API error: ${resp.status} ${err}`);
+      if (!resp.ok) {
+        const err = await resp.text();
+        if (resp.status >= 500 && attempt < retries) {
+          console.log(`AI API transient error (${resp.status}) — retry ${attempt}/${retries}`);
+          await new Promise((r) => setTimeout(r, 6000 * attempt));
+          continue;
+        }
+        throw new Error(`AI API error: ${resp.status} ${err}`);
+      }
+
+      const data = await resp.json();
+      const text = data.choices[0].message.content.trim();
+      const json = text.replace(/^```(?:json)?\s*/, '').replace(/\s*```$/, '');
+      return JSON.parse(json);
+    } catch (err) {
+      const isParseError = err instanceof SyntaxError;
+      if (attempt < retries && isParseError) {
+        console.log(`AI JSON parse issue (${String(err.message).slice(0, 60)}) — retry ${attempt}/${retries}`);
+        await new Promise((r) => setTimeout(r, 4000 * attempt));
+        continue;
+      }
+      throw err;
+    }
   }
-
-  const data = await resp.json();
-  const text = data.choices[0].message.content.trim();
-  const json = text.replace(/^```(?:json)?\s*/, '').replace(/\s*```$/, '');
-  return JSON.parse(json);
+  throw new Error('AI call retries exhausted');
 }
 
 async function generatePost(topic, bannedTitles, attemptsLeft = 3, forcedAngle = null) {
