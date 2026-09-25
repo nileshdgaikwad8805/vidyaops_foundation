@@ -40,5 +40,5 @@ jobs:
           git config user.email "nileshdgaikwad8805@gmail.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add -A
-          git diff --cached --quiet || git commit -m "Daily blog post: $(date +%Y-%m-%d)"
+          git diff --cached --quiet || git commit -m "Daily blog post: $(date +%Y-%m-%d)${{ inputs.mode && format(' ({0})', inputs.mode) }}"
           git push
