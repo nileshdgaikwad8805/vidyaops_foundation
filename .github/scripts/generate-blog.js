@@ -223,7 +223,7 @@ function aiEndpointConfig() {
       ? 'https://generativelanguage.googleapis.com/v1beta/openai'
       : 'https://api.openai.com/v1');
   const model =
-    process.env.OPENAI_MODEL || (process.env.GEMINI_API_KEY ? (process.env.GEMINI_MODEL || 'gemini-2.0-flash') : 'gpt-4o-mini');
+    process.env.OPENAI_MODEL || (process.env.GEMINI_API_KEY ? (process.env.GEMINI_MODEL || 'gemini-2.5-flash') : 'gpt-4o-mini');
   const apiKey = process.env.OPENAI_API_KEY || process.env.GEMINI_API_KEY;
   return { baseUrl, model, apiKey };
 }
