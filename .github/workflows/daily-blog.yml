@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'daily | regenerate-all | dedupe'
+        required: true
+        default: 'daily'
 
 jobs:
   generate:
@@ -21,8 +26,10 @@ jobs:
           node-version: 20
 
       - name: Generate blog post
-        run: node .github/scripts/generate-blog.js
+        run: node .github/scripts/generate-blog.js ${{ inputs.mode || 'daily' }}
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ secrets.GEMINI_MODEL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
