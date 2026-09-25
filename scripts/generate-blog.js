@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const POSTS_FILE = path.join(__dirname, '..', '..', 'src', 'assets', 'blog-posts.json');
-const DATA_TS_FILE = path.join(__dirname, '..', '..', 'src', 'app', 'core', 'data', 'blog-posts.data.ts');
+const POSTS_FILE = path.join(__dirname, '..', 'src', 'assets', 'blog-posts.json');
+const DATA_TS_FILE = path.join(__dirname, '..', 'src', 'app', 'core', 'data', 'blog-posts.data.ts');
 
 const DOMAINS = [
   'Cloud Computing',

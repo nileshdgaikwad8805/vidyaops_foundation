@@ -26,7 +26,7 @@ jobs:
           node-version: 20
 
       - name: Generate blog post
-        run: node .github/scripts/generate-blog.js ${{ inputs.mode || 'daily' }}
+        run: node scripts/generate-blog.js ${{ inputs.mode || 'daily' }}
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ secrets.GEMINI_MODEL }}
